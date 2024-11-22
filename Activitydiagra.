@@ -1,0 +1,25 @@
+Start
+  |
+  v
+[Input Chemical Data]
+  |
+  v
+[Set Mixing Parameters]
+  |
+  v
+[Verify Parameters] --(Invalid Parameters)---> [Error Message] ---> [Input Chemical Data]
+  |
+  v
+[Adjust for Temperature and Pressure]
+  |
+  v
+[Execute Simulation]
+  |
+  v
+[Calculate Resulting Properties]
+  |
+  v
+[Display or Export Results]
+  |
+  v
+End
