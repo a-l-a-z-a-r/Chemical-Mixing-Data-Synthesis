@@ -1,5 +1,5 @@
-Chemical Mixing Data Synthesis
-Project Objective
+# Chemical Mixing Data Synthesis
+## Project Objective
 The primary objective of this project is to develop a program, ideally in Go,
 that simulates the mixing of base chemicals into a final product (e.g.,
 combining sorbitol, alcohol, and water to produce mouthwash).
@@ -26,7 +26,7 @@ temperature effects, which we discussed previously.
 Feasibility: Training an AI model to optimize temperature, pressure, and
 duration of mixing is also achievable, though it depends on the availability
 of data.
-Steps to Implement:
+## Steps to Implement:
 Data Collection: Obtain data on successful mixing procedures, ideally
 from real-world production or experimental setups. This would include
 variations in mixing conditions and their impact on final product
@@ -37,7 +37,7 @@ data availability and complexity.
 Optimization Objective: Define a clear optimization objective (e.g.,
 minimize variation in final product properties), which the AI can target
 during training.
-Potential Challenges
+## Potential Challenges
 Data Availability: Accurate data on how variations in mixing parameters
 affect the final product may be challenging to source but is crucial for
 training the AI.
