@@ -4,14 +4,14 @@
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="KGl99FrV40Bi2zCLSono-1" value="" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+        <mxCell id="KGl99FrV40Bi2zCLSono-1" value="" style="whiteSpace=wrap;html=1;aspect=fixed;direction=south;" vertex="1" parent="1">
           <mxGeometry x="260" y="130" width="380" height="380" as="geometry" />
         </mxCell>
-        <mxCell id="KGl99FrV40Bi2zCLSono-2" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Chemist A&lt;br&gt;&lt;/div&gt;" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
-          <mxGeometry x="140" y="260" width="30" height="60" as="geometry" />
+        <mxCell id="KGl99FrV40Bi2zCLSono-2" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Chemist A&lt;br&gt;&lt;/div&gt;" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;direction=south;" vertex="1" parent="1">
+          <mxGeometry x="125" y="275" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="KGl99FrV40Bi2zCLSono-3" value="Actor" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
-          <mxGeometry x="790" y="240" width="30" height="60" as="geometry" />
+        <mxCell id="KGl99FrV40Bi2zCLSono-3" value="Actor" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;direction=south;" vertex="1" parent="1">
+          <mxGeometry x="775" y="255" width="60" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
