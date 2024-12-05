@@ -4,14 +4,8 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9c05ce82-46f1-4636-a5ec-48d1e621460a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Screenshot 2024-11-19 at 11.40.33.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/etc.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fat.cat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/passfail.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/source.go" beforeDir="false" />
+    <list default="true" id="9c05ce82-46f1-4636-a5ec-48d1e621460a" name="Changes" comment="Merge pull request #7 from a-l-a-z-a-r/Alazar&#10;&#10;change">
+      <changelist_data name="a-l-a-z-a-r" email="33756081+a-l-a-z-a-r@users.noreply.github.com" automatic="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +21,11 @@
   </component>
   <component name="GOROOT" url="file:///usr/local/go" />
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="a-l-a-z-a-r &lt;33756081+a-l-a-z-a-r@users.noreply.github.com&gt;" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory"><![CDATA[{
@@ -108,6 +107,11 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="tests and changes" />
+    <MESSAGE value="Merge pull request #7 from a-l-a-z-a-r/Alazar&#10;&#10;change" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge pull request #7 from a-l-a-z-a-r/Alazar&#10;&#10;change" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
