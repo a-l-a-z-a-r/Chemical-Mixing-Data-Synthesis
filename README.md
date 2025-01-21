@@ -1,5 +1,9 @@
 # Chemical Mixing Data Synthesis
-## Project Objective
+## Sprint plan 1 
+### Theme of sprint plan 
+### Stories of sprint plan 
+### High level design of sprint plan
+### Project Objective
 The primary objective of this project is to develop a program, ideally in Go,
 that simulates the mixing of base chemicals into a final product (e.g.,
 combining sorbitol, alcohol, and water to produce mouthwash).
