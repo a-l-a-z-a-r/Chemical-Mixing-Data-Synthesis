@@ -1,5 +1,50 @@
 # Chemical Mixing Data Synthesis
-## Project Objective
+## Sprint plan 1 
+### Theme of sprint plan 
+The main reason for the sprint is to have a vaiable sumilation of data mixing and a viable ai prediction system. The sprint will be completed when the simulated data meets the criteria given by the product owner and when the ai prediction has a high accuracy to give the paramaters. We will mainly focus on the data production phase and the machine learning aspect.
+### Stories of sprint plan 
+
+
+#### Generate simulated data that meet with:
+
+Milk Composition: Cream cheese production -> fat content between 12% and 16%.
+
+CDC CCL
+Homogenization and Pasteurization: ->  72–75°C for 30–90 seconds.
+
+
+
+
+Final Product Properties:
+
+Fat Content: Maximum -> 55%, Minimum fat content -> 30%
+
+pH Level: Cream cheese ->  4.4 to 4.9.
+
+
+Moisture Content: -> 55%
+
+#### Integrate a Neural net
+
+Machine learning -> through Gorgonia 
+
+Normalization of Data points 
+
+10 or higher hidden layers for Ai 
+
+Ai predictions: -> through proof based tests that demonstrate that the ai is working.
+Prediction rate of neural net -> 50% or higher
+
+
+
+### High level design of sprint plan
+
+
+
+
+
+
+### Project Objective
 The primary objective of this project is to develop a program, ideally in Go,
 that simulates the mixing of base chemicals into a final product (e.g.,
 combining sorbitol, alcohol, and water to produce mouthwash).
