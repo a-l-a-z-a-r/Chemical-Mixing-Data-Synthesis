@@ -26,35 +26,48 @@ type FermentationSystem struct {
 type KineticModel struct{}
 
 // Step performs one step of the kinetic model simulation
-func (km *KineticModel) Step(fs *FermentationSystem) {
-	// Calculate rate changes
-	dX_dt := fs.muMax*fs.X*(1-(fs.P-fs.Pix)/(fs.Pmx-fs.Pix)) + fs.F*fs.X/fs.V
-	dP_dt := fs.alpha*dX_dt + fs.qpMax*fs.X*fs.S/(fs.Kis+fs.S) + fs.F*fs.P/fs.V - fs.alpha*fs.X/fs.V
-	dS_dt := -fs.qsMax*fs.X*fs.Kis/(fs.Kis+fs.S) + fs.F*fs.S/fs.V
+func (km *KineticModel) Step(fs *FermentationSystem, temp float64, muRef, qpRef, qsRef, EaMu, EaQp, EaQs float64) error {
+	// Constants
+	R := 8.314
+	TRef := 298.15
+
+	// Ensure temperature is valid
+	if temp <= 0 {
+		return fmt.Errorf("temperature T must be greater than 0; got %f", temp)
+	}
+
+	// Calculate temperature-dependent rates
+	muMax := muRef * math.Exp(-EaMu/R*(1/temp-1/TRef))
+	qpMax := qpRef * math.Exp(-EaQp/R*(1/temp-1/TRef))
+	qsMax := qsRef * math.Exp(-EaQs/R*(1/temp-1/TRef))
+
+	// Clamp rates
+	muMax = math.Max(muMax, 1e-6)
+	qpMax = math.Max(qpMax, 1e-6)
+	qsMax = math.Max(qsMax, 1e-6)
+
+	// Existing kinetic equations
+	dX_dt := muMax*fs.X*(1-(fs.P-fs.Pix)/(fs.Pmx-fs.Pix)) + fs.F*fs.X/fs.V
+	dP_dt := fs.alpha*dX_dt + qpMax*fs.X*fs.S/(fs.Kis+fs.S) + fs.F*fs.P/fs.V - fs.alpha*fs.X/fs.V
+	dS_dt := -qsMax*fs.X*fs.Kis/(fs.Kis+fs.S) + fs.F*fs.S/fs.V
 	dV_dt := fs.F
-	if fs.V >= 2.0 { // Check if volume exceeds the threshold
+	if fs.V >= 2.0 {
 		dV_dt = 0.0
 	}
 
-	// Update values using Euler's method
+	// Euler integration
 	fs.X += dX_dt * fs.dt
 	fs.P += dP_dt * fs.dt
 	fs.S += dS_dt * fs.dt
 	fs.V += dV_dt * fs.dt
 
-	// Prevent negative or invalid values
-	if fs.X < 0 {
-		fs.X = 0
-	}
-	if fs.P < 0 {
-		fs.P = 0
-	}
-	if fs.S < 0 {
-		fs.S = 0
-	}
-	if fs.V < 0 {
-		fs.V = 0.001 // Prevent division by zero
-	}
+	// Prevent invalid values
+	fs.X = math.Max(fs.X, 0)
+	fs.P = math.Max(fs.P, 0)
+	fs.S = math.Max(fs.S, 0)
+	fs.V = math.Max(fs.V, 0.001)
+
+	return nil
 }
 
 // PHCalculator encapsulates the logic for calculating pH
@@ -74,17 +87,23 @@ func (pc *PHCalculator) Calculate(fs *FermentationSystem) float64 {
 
 // Simulation represents the entire fermentation process
 type Simulation struct {
-	System       FermentationSystem
-	KineticModel KineticModel
-	PHCalculator PHCalculator
-	TimeSteps    int
-	Results      [][]float64
+	System             FermentationSystem
+	KineticModel       KineticModel
+	PHCalculator       PHCalculator
+	TemperatureProfile []float64
+	TimeSteps          int
+	Results            [][]float64
 }
 
 // Run executes the simulation over the specified time steps
-func (sim *Simulation) Run() {
+func (sim *Simulation) Run(muRef, qpRef, qsRef, EaMu, EaQp, EaQs float64) {
 	for t := 0; t < sim.TimeSteps; t++ {
-		sim.KineticModel.Step(&sim.System)
+		temp := sim.TemperatureProfile[t]
+		err := sim.KineticModel.Step(&sim.System, temp, muRef, qpRef, qsRef, EaMu, EaQp, EaQs)
+		if err != nil {
+			fmt.Printf("Error at step %d: %v\n", t, err)
+			break
+		}
 		pH := sim.PHCalculator.Calculate(&sim.System)
 		sim.Results = append(sim.Results, []float64{
 			float64(t) * sim.System.dt,
@@ -93,6 +112,7 @@ func (sim *Simulation) Run() {
 			sim.System.S,
 			sim.System.V,
 			pH,
+			temp,
 		})
 	}
 }
@@ -125,27 +145,37 @@ func NewSimulation(muMax, alpha, qpMax, qsMax, Kis, Pix, Pmx, F, dt float64, tim
 }
 
 func main() {
-	// Simulation settings
+	// Simulation parameters
 	timeSteps := 100
 	dt := 0.1
 
-	// Parameters for the fermentation model
-	muMax := 1.54e-10
+	// Temperature profile
+	temperatureProfile := make([]float64, timeSteps)
+	for i := 0; i < timeSteps; i++ {
+		temperatureProfile[i] = 300 + 5*math.Sin(2*math.Pi*float64(i)/float64(timeSteps)) // Oscillating temp
+	}
+
+	// Fermentation parameters
+	muRef := 1.54e-10
 	alpha := 1.33
-	qpMax := 3.75e-5
-	qsMax := 2.10e-4
+	qpRef := 3.75e-5
+	qsRef := 2.10e-4
+	EaMu := 50000.0
+	EaQp := 40000.0
+	EaQs := 45000.0
 	Kis := 5.41e5
 	Pix := 4.0
 	Pmx := 4.8
 	F := 1.0
 
-	// Initialize and run the simulation
-	simulation := NewSimulation(muMax, alpha, qpMax, qsMax, Kis, Pix, Pmx, F, dt, timeSteps)
-	simulation.Run()
+	// Initialize simulation
+	simulation := NewSimulation(muRef, alpha, qpRef, qsRef, Kis, Pix, Pmx, F, dt, timeSteps)
+	simulation.TemperatureProfile = temperatureProfile
+	simulation.Run(muRef, qpRef, qsRef, EaMu, EaQp, EaQs)
 
 	// Print results
-	fmt.Println("Time\tX (Biomass)\tP (Lactic Acid)\tS (Lactose)\tV (Volume)\tpH")
+	fmt.Println("Time\tX\tP\tS\tV\tpH\tTemp")
 	for _, result := range simulation.Results {
-		fmt.Printf("%.2f\t%.6f\t%.6f\t%.6f\t%.6f\t%.2f\n", result[0], result[1], result[2], result[3], result[4], result[5])
+		fmt.Printf("%.2f\t%.6f\t%.6f\t%.6f\t%.6f\t%.2f\t%.2f\n", result[0], result[1], result[2], result[3], result[4], result[5], result[6])
 	}
 }
