@@ -1,5 +1,11 @@
 # Chemical Mixing Data Synthesis
-## Project Objective
+## Sprint plan 1 
+### Theme of sprint plan 
+The main reason for the sprint is to have a vaiable sumilation of data mixing and a viable ai prediction system. The sprint will be completed when the simulated data meets the criteria given by the product owner and when the ai prediction has a high accuracy to give the paramaters.
+### Stories of sprint plan 
+
+### High level design of sprint plan
+### Project Objective
 The primary objective of this project is to develop a program, ideally in Go,
 that simulates the mixing of base chemicals into a final product (e.g.,
 combining sorbitol, alcohol, and water to produce mouthwash).
