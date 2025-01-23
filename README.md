@@ -3,32 +3,37 @@
 ### Theme of sprint plan 
 The main reason for the sprint is to have a vaiable sumilation of data mixing and a viable ai prediction system. The sprint will be completed when the simulated data meets the criteria given by the product owner and when the ai prediction has a high accuracy to give the paramaters. We will mainly focus on the data production phase and the machine learning aspect.
 ### Stories of sprint plan 
+
+
 #### Generate simulated data that meet with:
 
-Milk Composition: Cream cheese production typically starts with standardized milk, often with a fat content between 12% and 16%. This standardization ensures consistency in the final product's texture and flavor. 
+Milk Composition: Cream cheese production -> fat content between 12% and 16%.
 
 CDC CCL
-Homogenization and Pasteurization: The milk undergoes homogenization to ensure uniform fat distribution and pasteurization at 72–75°C for 30–90 seconds to eliminate harmful microorganisms. 
+Homogenization and Pasteurization: ->  72–75°C for 30–90 seconds.
 
-CDC CCL
+
+
+
 Final Product Properties:
 
-Fat Content: Cream cheese is characterized by a high-fat content. In the United States, regulations require cream cheese to contain at least 33% fat with a moisture content not exceeding 55%. In Canada, the minimum fat content is 30%, with the same maximum moisture content. 
+Fat Content: Maximum -> 55%, Minimum fat content -> 30%
 
-Wikipedia
-Texture and Consistency: The final product is a soft, spreadable cheese with a smooth texture. The consistency can range from hard/brittle in regular cream cheese to more spreadable in light versions, influenced by factors such as fat content and processing conditions. 
+pH Level: Cream cheese ->  4.4 to 4.9.
 
-CDC CCL
-pH Level: Cream cheese typically has a pH range of 4.4 to 4.9, contributing to its mildly tangy flavor. 
 
-Wikipedia
-Moisture Content: The moisture content is maintained below 55%, ensuring the desired firmness and shelf stability. 
+Moisture Content: -> 55%
 
-#### Integrate a Neural 
+#### Integrate a Neural net
 
-Machine learning adaptations through Gorgonia
+Machine learning -> through Gorgonia 
 
-Ai predictions through proof based tests that demonstrate that the ai is working 
+Normalization of Data points 
+
+10 or higher hidden layers for Ai 
+
+Ai predictions: -> through proof based tests that demonstrate that the ai is working.
+Prediction rate of neural net -> 50% or higher
 
 
 
