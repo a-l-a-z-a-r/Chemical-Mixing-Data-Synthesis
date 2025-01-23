@@ -1,10 +1,44 @@
 # Chemical Mixing Data Synthesis
 ## Sprint plan 1 
 ### Theme of sprint plan 
-The main reason for the sprint is to have a vaiable sumilation of data mixing and a viable ai prediction system. The sprint will be completed when the simulated data meets the criteria given by the product owner and when the ai prediction has a high accuracy to give the paramaters.
+The main reason for the sprint is to have a vaiable sumilation of data mixing and a viable ai prediction system. The sprint will be completed when the simulated data meets the criteria given by the product owner and when the ai prediction has a high accuracy to give the paramaters. We will mainly focus on the data production phase and the machine learning aspect.
 ### Stories of sprint plan 
+#### Generate simulated data that meet with:
+
+Milk Composition: Cream cheese production typically starts with standardized milk, often with a fat content between 12% and 16%. This standardization ensures consistency in the final product's texture and flavor. 
+
+CDC CCL
+Homogenization and Pasteurization: The milk undergoes homogenization to ensure uniform fat distribution and pasteurization at 72–75°C for 30–90 seconds to eliminate harmful microorganisms. 
+
+CDC CCL
+Final Product Properties:
+
+Fat Content: Cream cheese is characterized by a high-fat content. In the United States, regulations require cream cheese to contain at least 33% fat with a moisture content not exceeding 55%. In Canada, the minimum fat content is 30%, with the same maximum moisture content. 
+
+Wikipedia
+Texture and Consistency: The final product is a soft, spreadable cheese with a smooth texture. The consistency can range from hard/brittle in regular cream cheese to more spreadable in light versions, influenced by factors such as fat content and processing conditions. 
+
+CDC CCL
+pH Level: Cream cheese typically has a pH range of 4.4 to 4.9, contributing to its mildly tangy flavor. 
+
+Wikipedia
+Moisture Content: The moisture content is maintained below 55%, ensuring the desired firmness and shelf stability. 
+
+#### Integrate a Neural 
+
+Machine learning adaptations through Gorgonia
+
+Ai predictions through proof based tests that demonstrate that the ai is working 
+
+
 
 ### High level design of sprint plan
+
+
+
+
+
+
 ### Project Objective
 The primary objective of this project is to develop a program, ideally in Go,
 that simulates the mixing of base chemicals into a final product (e.g.,
