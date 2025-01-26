@@ -51,8 +51,10 @@ func (km *KineticModel) Step(fs *FermentationSystem, temp float64, muRef, qpRef,
 	dP_dt := fs.alpha*dX_dt + qpMax*fs.X*fs.S/(fs.Kis+fs.S) + fs.F*fs.P/fs.V - fs.alpha*fs.X/fs.V
 	dS_dt := -qsMax*fs.X*fs.Kis/(fs.Kis+fs.S) + fs.F*fs.S/fs.V
 	dV_dt := fs.F
-	if fs.V >= 2.0 {
-		dV_dt = 0.0
+	if fs.V >= 2.0 { // If volume is greater than 2.0, stop adding more
+		fs.F = 0.0 // we had dV_dt = 0.0 in another version of the code, because of this change P becomes 0.0 in the results, we have to think about that,X and S got o zero too if we change below
+		//fs.X = 0.0	//" which is the same for X, P, S"
+		//fs.S = 0.0
 	}
 
 	// Euler integration
@@ -113,6 +115,7 @@ func (sim *Simulation) Run(muRef, qpRef, qsRef, EaMu, EaQp, EaQs float64) {
 			sim.System.V,
 			pH,
 			temp,
+			//sim.System.F,
 		})
 	}
 }
@@ -120,18 +123,18 @@ func (sim *Simulation) Run(muRef, qpRef, qsRef, EaMu, EaQp, EaQs float64) {
 // NewSimulation initializes and returns a new Simulation instance
 func NewSimulation(muMax, alpha, qpMax, qsMax, Kis, Pix, Pmx, F, dt float64, timeSteps int) *Simulation {
 	system := FermentationSystem{
-		X:     0.1,  // Biomass concentration
-		P:     0.02, // Lactic acid concentration
-		S:     45.0, // Lactose concentration
-		V:     0.5,  // Initial volume
-		muMax: muMax,
-		alpha: alpha,
-		qpMax: qpMax,
-		qsMax: qsMax,
+		X:     0.1,   // Biomass concentration
+		P:     0.02,  // Lactic acid concentration
+		S:     45.0,  // Lactose concentration
+		V:     0.5,   // Initial volume
+		muMax: muMax, // Maximum growth rate
+		alpha: alpha, // Inhibition constant
+		qpMax: qpMax, // Maximum specific lactic acid production rate
+		qsMax: qsMax, // Maximum specific lactose utilisation rate
 		Kis:   Kis,
-		Pix:   Pix,
-		Pmx:   Pmx,
-		F:     F,
+		Pix:   Pix, // Threshold lactate concentration before any inhibition occurs
+		Pmx:   Pmx, // Maximum inhibitory value
+		F:     F,   // Flow-in rate
 		dt:    dt,
 	}
 
@@ -149,17 +152,20 @@ func main() {
 	timeSteps := 100
 	dt := 0.1
 
+	// We have to variate the 300 in the loop below
 	// Temperature profile
 	temperatureProfile := make([]float64, timeSteps)
 	for i := 0; i < timeSteps; i++ {
 		temperatureProfile[i] = 300 + 5*math.Sin(2*math.Pi*float64(i)/float64(timeSteps)) // Oscillating temp
 	}
 
-	// Fermentation parameters
-	muRef := 1.54e-10
+	// Fermentation parameters - from literature: "pH prediction for a semi-batch cream cheese
+	// fermentation using a grey-box model", table 2
+
+	muRef := 1.54e-10 // refers to muMax
 	alpha := 1.33
-	qpRef := 3.75e-5
-	qsRef := 2.10e-4
+	qpRef := 3.75e-5 // refers to qpMax
+	qsRef := 2.10e-4 // refers to qsMax
 	EaMu := 50000.0
 	EaQp := 40000.0
 	EaQs := 45000.0
