@@ -1,9 +1,48 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:134.0) Gecko/20100101 Firefox/134.0" version="25.0.3">
   <diagram name="Page-1" id="8yLfHQjdgGl9Q5gJE-Qp">
-    <mxGraphModel>
+    <mxGraphModel dx="954" dy="579" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="900" pageHeight="1600" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="OVM-OTWfAVwL3RLM8YyT-1" value="" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#ff0000;" vertex="1" parent="1">
+          <mxGeometry x="330" y="60" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="OVM-OTWfAVwL3RLM8YyT-5" value="" style="endArrow=open;endFill=1;endSize=12;html=1;rounded=0;" edge="1" parent="1" source="OVM-OTWfAVwL3RLM8YyT-1">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="180" y="205" as="sourcePoint" />
+            <mxPoint x="345" y="160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="OVM-OTWfAVwL3RLM8YyT-7" value="Initiate variables" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="295" y="160" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="OVM-OTWfAVwL3RLM8YyT-8" value="" style="endArrow=open;endFill=1;endSize=12;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="OVM-OTWfAVwL3RLM8YyT-7">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="320" y="250" as="sourcePoint" />
+            <mxPoint x="345" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="OVM-OTWfAVwL3RLM8YyT-9" value="Simulate Kinetic Model" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="282.5" y="270" width="125" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="OVM-OTWfAVwL3RLM8YyT-10" value="" style="endArrow=open;endFill=1;endSize=12;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="OVM-OTWfAVwL3RLM8YyT-9">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="330" y="370" as="sourcePoint" />
+            <mxPoint x="345" y="390" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="OVM-OTWfAVwL3RLM8YyT-13" value="Run Kinetic Model" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="282.5" y="390" width="125" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="OVM-OTWfAVwL3RLM8YyT-14" value="" style="endArrow=open;endFill=1;endSize=12;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="OVM-OTWfAVwL3RLM8YyT-13">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="355" y="330" as="sourcePoint" />
+            <mxPoint x="345" y="490" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="OVM-OTWfAVwL3RLM8YyT-15" value="Save generated data into csv" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="295" y="490" width="100" height="40" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
