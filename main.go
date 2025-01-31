@@ -13,6 +13,7 @@ func main() {
 		fmt.Print("What is your name ? > ")
 		reader := bufio.NewReader(os.Stdin)
 		line, err := reader.ReadString('\n')
+		mmmmmmmmm
 		if err != nil {
 			log.Fatal(err)
 		}
