@@ -5,7 +5,6 @@ import (
 	"math"
 )
 
-// Hello returns a greeting for the named person.
 func KineticModelStep(X, P, S, V, F, T, muRef, qpRef, qsRef, EaMu, EaQp, EaQs, Kis, Pix, Pmx, Inhib, Ksp, dt float64) (float64, float64, float64, float64, error) {
 	// Constants
 	R := 8.314     // Gas constant (J/mol/K)

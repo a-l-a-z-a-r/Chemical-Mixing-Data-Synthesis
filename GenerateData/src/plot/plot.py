@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-csv_file = "fermentation_results2.csv"
+csv_file = "fermentation_results4.csv"
 df = pd.read_csv(csv_file)
 
 # Clean up column names

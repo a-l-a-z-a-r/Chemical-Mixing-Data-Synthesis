@@ -12,11 +12,11 @@ import (
 func main() {
 	// Initial conditions
 	initialConditions := map[string]float64{
-		"X": 0.1,  // Initial biomass (g/L)
-		"P": 0.02, // Initial lactic acid (g/L)
-		"S": 45.0, // Initial lactose (g/L)
-		"V": 0.5,  // Initial volume (L)
-		"F": 1.0,  // Flow rate (L/h)
+		"X": 0.137,  // Initial biomass (g/L)
+		"P": 0.024,  // Initial lactic acid (g/L)
+		"S": 41.246, // Initial lactose (g/L)
+		"V": 0.5,    // Initial volume (L)
+		"F": 1.0,    // Flow rate (L/h) constant untill the volume reaches 2 Liters then it will be set to zero
 	}
 	/*
 		initialConditions2 := map[string]float64{
@@ -58,8 +58,8 @@ func main() {
 	}
 
 	// Temperature profile (oscillating temperature around 300K)
-	timeSteps := 100
-	var dt float64 = 100.0
+	timeSteps := 24
+	var dt float64 = 3600
 	temperatureProfile := make([]float64, timeSteps)
 	for i := 0; i < timeSteps; i++ {
 		temperatureProfile[i] = 300 + 5*math.Sin(2*math.Pi*float64(i)/float64(timeSteps)) // Oscillating temp
@@ -69,7 +69,7 @@ func main() {
 	results := simulation.SimulateKineticModel(initialConditions, params, temperatureProfile, timeSteps, dt)
 
 	// Create a CSV file
-	file, err := os.Create("fermentation_results2.csv")
+	file, err := os.Create("fermentation_results4.csv")
 	if err != nil {
 		fmt.Println("Error creating CSV file:", err)
 		return
