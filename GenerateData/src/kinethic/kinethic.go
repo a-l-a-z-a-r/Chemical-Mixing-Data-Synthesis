@@ -15,7 +15,7 @@ func KineticModelStep(X, P, S, V, F, T, muRef, qpRef, qsRef, EaMu, EaQp, EaQs, K
 	}
 
 	if F >= 2 {
-		return X, P, S, V, fmt.Errorf("Flow rate can't be larger than 2 Liters  %f", F)
+		return X, P, S, V, fmt.Errorf("flow rate can't be larger than 2 Liters  %f", F)
 	}
 
 	Xmix := (F * X) / V // g/L Biomass concentreation(Even if a formula is given int Missing x-mixture data asumptions, paper does not provide sufficient data
@@ -38,6 +38,11 @@ func KineticModelStep(X, P, S, V, F, T, muRef, qpRef, qsRef, EaMu, EaQp, EaQs, K
 	P += dP * dt
 	S += dS * dt
 	V += dV * dt
+
+	if X <= 0 {
+		var X float64 = 0
+		return X, P, S, V, nil
+	}
 
 	return X, P, S, V, nil
 }
