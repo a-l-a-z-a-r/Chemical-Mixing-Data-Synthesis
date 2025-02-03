@@ -18,7 +18,30 @@ func main() {
 		"V": 0.5,  // Initial volume (L)
 		"F": 1.0,  // Flow rate (L/h)
 	}
+	/*
+		initialConditions1 := map[string]float64{
+			"X": 0.1,  // Initial biomass (g/L)
+			"P": 0.02, // Initial lactic acid (g/L)
+			"S": 45.0, // Initial lactose (g/L)
+			"V": 0.5,  // Initial volume (L)
+			"F": 1.0,  // Flow rate (L/h)
+		}
 
+		initialConditions2 := map[string]float64{
+			"X": 0.1,  // Initial biomass (g/L)
+			"P": 0.02, // Initial lactic acid (g/L)
+			"S": 45.0, // Initial lactose (g/L)
+			"V": 0.5,  // Initial volume (L)
+			"F": 1.0,  // Flow rate (L/h)
+		}
+		initialConditions3 := map[string]float64{
+			"X": 0.1,  // Initial biomass (g/L)
+			"P": 0.02, // Initial lactic acid (g/L)
+			"S": 45.0, // Initial lactose (g/L)
+			"V": 0.5,  // Initial volume (L)
+			"F": 1.0,  // Flow rate (L/h)
+		}
+	*/
 	// Parameters
 	params := map[string]float64{
 		"muRef": 1.54e-10, // Reference growth rate
