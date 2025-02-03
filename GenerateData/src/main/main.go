@@ -19,14 +19,6 @@ func main() {
 		"F": 1.0,  // Flow rate (L/h)
 	}
 	/*
-		initialConditions1 := map[string]float64{
-			"X": 0.1,  // Initial biomass (g/L)
-			"P": 0.02, // Initial lactic acid (g/L)
-			"S": 45.0, // Initial lactose (g/L)
-			"V": 0.5,  // Initial volume (L)
-			"F": 1.0,  // Flow rate (L/h)
-		}
-
 		initialConditions2 := map[string]float64{
 			"X": 0.1,  // Initial biomass (g/L)
 			"P": 0.02, // Initial lactic acid (g/L)
@@ -34,7 +26,15 @@ func main() {
 			"V": 0.5,  // Initial volume (L)
 			"F": 1.0,  // Flow rate (L/h)
 		}
+
 		initialConditions3 := map[string]float64{
+			"X": 0.1,  // Initial biomass (g/L)
+			"P": 0.02, // Initial lactic acid (g/L)
+			"S": 45.0, // Initial lactose (g/L)
+			"V": 0.5,  // Initial volume (L)
+			"F": 1.0,  // Flow rate (L/h)
+		}
+		initialConditions4 := map[string]float64{
 			"X": 0.1,  // Initial biomass (g/L)
 			"P": 0.02, // Initial lactic acid (g/L)
 			"S": 45.0, // Initial lactose (g/L)
@@ -51,6 +51,8 @@ func main() {
 		"EaQp":  40000.0,  // Activation energy for lactic acid production (J/mol)
 		"EaQs":  45000.0,  // Activation energy for lactose utilization (J/mol)
 		"Kis":   5.41e5,   // Lactose limitation constant
+		"Ksp":   -27.50,   // unkown equilibrium constant
+		"Inhib": 1.33,     // Inhibition constant
 		"Pix":   4.8,      // Initial inhibition concentration
 		"Pmx":   5.0,      // Maximum inhibitory concentration (set higher than Pix)
 	}
@@ -67,7 +69,7 @@ func main() {
 	results := simulation.SimulateKineticModel(initialConditions, params, temperatureProfile, timeSteps, dt)
 
 	// Create a CSV file
-	file, err := os.Create("fermentation_results.csv")
+	file, err := os.Create("fermentation_results2.csv")
 	if err != nil {
 		fmt.Println("Error creating CSV file:", err)
 		return

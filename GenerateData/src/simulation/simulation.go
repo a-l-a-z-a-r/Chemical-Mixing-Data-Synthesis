@@ -18,7 +18,9 @@ func SimulateKineticModel(initialConditions map[string]float64, params map[strin
 	qpRef := params["qpRef"]
 	qsRef := params["qsRef"]
 	EaMu := params["EaMu"]
+	Ksp := params["Ksp"]
 	EaQp := params["EaQp"]
+	Inhib := params["Inhib"]
 	EaQs := params["EaQs"]
 	Kis := params["Kis"]
 	Pix := params["Pix"]
@@ -31,7 +33,7 @@ func SimulateKineticModel(initialConditions map[string]float64, params map[strin
 	for t := 0; t < timeSteps; t++ {
 		T := temperatureProfile[t] // Get temperature at current time step
 		var err error
-		X, P, S, V, err = kinethic.KineticModelStep(X, P, S, V, F, T, muRef, qpRef, qsRef, EaMu, EaQp, EaQs, Kis, Pix, Pmx, dt)
+		X, P, S, V, err = kinethic.KineticModelStep(X, P, S, V, F, T, muRef, qpRef, qsRef, EaMu, EaQp, EaQs, Kis, Pix, Pmx, Inhib, Ksp, dt)
 		if err != nil {
 			fmt.Printf("Error at time step %d: %v\n", t, err)
 			break
