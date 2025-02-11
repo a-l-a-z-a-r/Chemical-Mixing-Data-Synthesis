@@ -15,33 +15,10 @@ func main() {
 		"X": 0.137,  // Initial biomass (g/L)
 		"P": 0.024,  // Initial lactic acid (g/L)
 		"S": 41.246, // Initial lactose (g/L)
-		"V": 0.5,    // Initial volume (L)
-		"F": 1.0,    // Flow rate (L/h) constant untill the volume reaches 2 Liters then it will be set to zero
+		"V": 500,    // Initial volume (mL)
+		"F": 0.2778, // Flow rate (L/h)
 	}
-	/*
-		initialConditions2 := map[string]float64{
-			"X": 0.1,  // Initial biomass (g/L)
-			"P": 0.02, // Initial lactic acid (g/L)
-			"S": 45.0, // Initial lactose (g/L)
-			"V": 0.5,  // Initial volume (L)
-			"F": 1.0,  // Flow rate (L/h)
-		}
 
-		initialConditions3 := map[string]float64{
-			"X": 0.1,  // Initial biomass (g/L)
-			"P": 0.02, // Initial lactic acid (g/L)
-			"S": 45.0, // Initial lactose (g/L)
-			"V": 0.5,  // Initial volume (L)
-			"F": 1.0,  // Flow rate (L/h)
-		}
-		initialConditions4 := map[string]float64{
-			"X": 0.1,  // Initial biomass (g/L)
-			"P": 0.02, // Initial lactic acid (g/L)
-			"S": 45.0, // Initial lactose (g/L)
-			"V": 0.5,  // Initial volume (L)
-			"F": 1.0,  // Flow rate (L/h)
-		}
-	*/
 	// Parameters
 	params := map[string]float64{
 		"muRef": 1.54e-10, // Reference growth rate
@@ -51,15 +28,15 @@ func main() {
 		"EaQp":  40000.0,  // Activation energy for lactic acid production (J/mol)
 		"EaQs":  45000.0,  // Activation energy for lactose utilization (J/mol)
 		"Kis":   5.41e5,   // Lactose limitation constant
-		"Ksp":   -27.50,   // unkown equilibrium constant
+		"Ksp":   -27.50,   // Unknown equilibrium constant
 		"Inhib": 1.33,     // Inhibition constant
 		"Pix":   4.8,      // Initial inhibition concentration
-		"Pmx":   5.0,      // Maximum inhibitory concentration (set higher than Pix)
+		"Pmx":   5.0,      // Maximum inhibitory concentration
 	}
 
 	// Temperature profile (oscillating temperature around 300K)
-	timeSteps := 24
-	var dt float64 = 3600
+	timeSteps := 5399
+	var dt float64 = 1 // Measurements taken every hour for 25 hours
 	temperatureProfile := make([]float64, timeSteps)
 	for i := 0; i < timeSteps; i++ {
 		temperatureProfile[i] = 300 + 5*math.Sin(2*math.Pi*float64(i)/float64(timeSteps)) // Oscillating temp
@@ -69,37 +46,40 @@ func main() {
 	results := simulation.SimulateKineticModel(initialConditions, params, temperatureProfile, timeSteps, dt)
 
 	// Create a CSV file
-	file, err := os.Create("fermentation_results4.csv")
+	file, err := os.Create("fermentation_results.csv")
 	if err != nil {
 		fmt.Println("Error creating CSV file:", err)
 		return
 	}
-	defer file.Close() // Ensure the file is closed after writing
+	defer file.Close()
 
 	// Create a CSV writer
 	writer := csv.NewWriter(file)
-	defer writer.Flush() // Ensure data is written to file
+	defer writer.Flush()
 
-	// Write the CSV header with spacing for clarity
-	header := []string{"Time (s)", "Biomass (g/L)", "Lactic Acid (g/L)", "Lactose (g/L)", "Volume (L)", "Temperature (K)"}
+	// Write the CSV header
+	header := []string{"Time (s)", "Biomass (g/mL)", "Lactic Acid (g/mL)", "Lactose (g/mL)", "Volume (mL)", "Temperature (K)", "pH"}
 	if err := writer.Write(header); err != nil {
 		fmt.Println("Error writing CSV header:", err)
 		return
 	}
 
-	// Write simulation data to CSV with clear formatting
+	// Write simulation data to CSV
 	for i, res := range results {
 		row := []string{
-			fmt.Sprintf("%-10.1f", float64(i)*dt), // Align values properly
-			fmt.Sprintf("%-12.4f", res[0]),
-			fmt.Sprintf("%-15.4f", res[1]),
-			fmt.Sprintf("%-15.4f", res[2]),
-			fmt.Sprintf("%-10.4f", res[3]),
-			fmt.Sprintf("%-10.2f", res[4]),
+			fmt.Sprintf("%.1f", float64(i)*dt), // Time
+			fmt.Sprintf("%.4f", res[0]),        // Biomass
+			fmt.Sprintf("%.4f", res[1]),        // Lactic Acid
+			fmt.Sprintf("%.4f", res[2]),        // Lactose
+			fmt.Sprintf("%.4f", res[3]),        // Volume
+			fmt.Sprintf("%.2f", res[4]),        // Temperature
+			fmt.Sprintf("%.2f", res[5]),        // pH
 		}
 		if err := writer.Write(row); err != nil {
 			fmt.Println("Error writing CSV row:", err)
 			return
 		}
 	}
+
+	fmt.Println("Simulation completed. Results saved in 'fermentation_results.csv'.")
 }
