@@ -28,7 +28,6 @@ func KineticModelStep(X, P, S, V, F, T, muRef, qpRef, qsRef, EaMu, EaQp, EaQs, K
 
 	dP := Inhib*dX + qpMax*X*S/(V*Ksp+S) + F*P/V - Inhib*(X/V) + Pmix
 	dS := -qsMax*X*V*Kis/(V*Kis+S) + F*(S/V) + Smix
-	fmt.Println(muMax * X * (1 - (P-Pix)/(Pmx-Pix)))
 
 	// Update variables using Euler's method
 	X += dX * dt
