@@ -3,53 +3,22 @@ package main
 import (
 	"encoding/csv"
 	"fmt"
+	"log"
 	"math"
 	"os"
 
 	"github.com/simulation"
 )
 
-func main() {
-	// Initial conditions
-	initialConditions := map[string]float64{
-		"X": 0.137,  // Initial biomass (g/L)
-		"P": 0.024,  // Initial lactic acid (g/L)
-		"S": 41.246, // Initial lactose (g/L)
-		"V": 500,    // Initial volume (mL)
-		"F": 0.2778, // Flow rate (L/h)
-	}
-
-	// Parameters
-	params := map[string]float64{
-		"muRef": 1.54e-10, // Reference growth rate
-		"qpRef": 3.75e-5,  // Reference lactic acid production rate
-		"qsRef": 2.10e-4,  // Reference lactose utilization rate
-		"EaMu":  50000.0,  // Activation energy for growth rate (J/mol)
-		"EaQp":  40000.0,  // Activation energy for lactic acid production (J/mol)
-		"EaQs":  45000.0,  // Activation energy for lactose utilization (J/mol)
-		"Kis":   5.41e5,   // Lactose limitation constant
-		"Ksp":   -27.50,   // Unknown equilibrium constant
-		"Inhib": 1.33,     // Inhibition constant
-		"Pix":   4.8,      // Initial inhibition concentration
-		"Pmx":   5.0,      // Maximum inhibitory concentration
-	}
-
-	// Temperature profile (oscillating temperature around 300K)
-	timeSteps := 5399
-	var dt float64 = 1 // Measurements taken every hour for 25 hours
-	temperatureProfile := make([]float64, timeSteps)
-	for i := 0; i < timeSteps; i++ {
-		temperatureProfile[i] = 300 + 5*math.Sin(2*math.Pi*float64(i)/float64(timeSteps)) // Oscillating temp
-	}
-
-	// Run simulation
+// Function to run the simulation for a given set of initial conditions
+func runSimulation(initialConditions map[string]float64, params map[string]float64, temperatureProfile []float64, timeSteps int, dt float64, fileName string) {
+	// Run the simulation
 	results := simulation.SimulateKineticModel(initialConditions, params, temperatureProfile, timeSteps, dt)
 
 	// Create a CSV file
-	file, err := os.Create("fermentation_results.csv")
+	file, err := os.Create(fileName)
 	if err != nil {
-		fmt.Println("Error creating CSV file:", err)
-		return
+		log.Fatalf("Error creating CSV file %s: %v", fileName, err)
 	}
 	defer file.Close()
 
@@ -60,8 +29,7 @@ func main() {
 	// Write the CSV header
 	header := []string{"Time (s)", "Biomass (g/mL)", "Lactic Acid (g/mL)", "Lactose (g/mL)", "Volume (mL)", "Temperature (K)", "pH"}
 	if err := writer.Write(header); err != nil {
-		fmt.Println("Error writing CSV header:", err)
-		return
+		log.Fatalf("Error writing CSV header for %s: %v", fileName, err)
 	}
 
 	// Write simulation data to CSV
@@ -76,10 +44,43 @@ func main() {
 			fmt.Sprintf("%.2f", res[5]),        // pH
 		}
 		if err := writer.Write(row); err != nil {
-			fmt.Println("Error writing CSV row:", err)
-			return
+			log.Fatalf("Error writing CSV row for %s: %v", fileName, err)
 		}
 	}
 
-	fmt.Println("Simulation completed. Results saved in 'fermentation_results.csv'.")
+	fmt.Printf("Simulation completed. Results saved in '%s'.\n", fileName)
+}
+
+func main() {
+	// List of initial conditions for different biomass values
+	initialConditionsList := []map[string]float64{
+		{"X": 0.137, "P": 41.246, "S": 0.024, "V": 500, "F": 0.2778},
+		{"X": 0.040, "P": 44.102, "S": 0.023, "V": 1500, "F": 0.2778},
+		{"X": 0.082, "P": 45.563, "S": 0.021, "V": 1500, "F": 0.2778},
+	}
+
+	// Parameters for simulation
+	params := map[string]float64{
+		"muRef": 1.54e-10, "qpRef": 3.75e-5, "qsRef": 2.10e-4,
+		"EaMu": 50000.0, "EaQp": 40000.0, "EaQs": 45000.0,
+		"Kis": 5.41e5, "Ksp": -27.50, "Inhib": 1.33,
+		"Pix": 4.8, "Pmx": 5.0,
+	}
+
+	// Generate a temperature profile
+	timeSteps := 18000
+	dt := 1.0
+	temperatureProfile := make([]float64, timeSteps)
+	for i := 0; i < timeSteps; i++ {
+		temperatureProfile[i] = 300 + 5*math.Sin(2*math.Pi*float64(i)/float64(timeSteps))
+	}
+
+	// Run simulation for each set of initial conditions
+	for _, initialConditions := range initialConditionsList {
+		// Create a unique filename based on initial biomass value
+		fileName := fmt.Sprintf("fermentation_X_%.3f.csv", initialConditions["X"])
+
+		// Run the simulation and save results
+		runSimulation(initialConditions, params, temperatureProfile, timeSteps, dt, fileName)
+	}
 }

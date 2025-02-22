@@ -42,10 +42,14 @@ func KineticModelStep(X, P, S, V, F, T, muRef, qpRef, qsRef, EaMu, EaQp, EaQs, K
 	V = (V + F) * chn
 
 	Ve := &V
+	Se := &S
 
 	if V >= 2000 {
-		*Ve = 0
+		*Ve = 2000
 		F = 0
+	}
+	if S < 0 {
+		*Se = 0
 	}
 
 	return X, P, S, V, nil
