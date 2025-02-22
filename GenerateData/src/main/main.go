@@ -80,7 +80,7 @@ func main() {
 
 	for _, initialConditions := range initialConditionsList {
 		// Create a unique filename based on initial biomass value
-		fileName := fmt.Sprintf("fermentation_X_%.3f.csv", initialConditions["X"])
+		fileName := fmt.Sprintf("fermentation_X_%.3f", initialConditions["X"])
 		fileName = fmt.Sprintf("fermentation_X_%s.csv", fileName)
 
 		runSimulation(initialConditions, params, temperatureProfile, timeSteps, dt, fileName)
