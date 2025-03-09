@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pH Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Enter Values to Predict pH</h1>
+        
+        <form method="POST">
+            <input type="number" step="any" name="X" placeholder="X (Biomass)" required>
+            <input type="number" step="any" name="P" placeholder="P (Lactic Acid)" required>
+            <input type="number" step="any" name="S" placeholder="S (Lactose)" required>
+            <input type="number" step="any" name="V" placeholder="V (Volume)" required>
+            
+            <button type="submit">Predict pH</button>
+        </form>
+
+        {% if predicted_ph %}
+        <div class="result">
+            <h2>Predicted pH: {{ predicted_ph }}</h2>
+        </div>
+        {% endif %}
+        
+        <a href="{{ url_for('home') }}" class="back-button">Go Back</a>
+    </div>
+</body>
+</html>

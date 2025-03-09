@@ -34,7 +34,7 @@ import (
 		// Output: 3.0”
 
 }
-*/
+
 func main() {
 	g := NewGraph()
 	matB := []float64{0.9, 0.7, 0.4, 0.2}
@@ -55,3 +55,4 @@ func main() {
 
 	// Output: [9.4 3.4]”
 }
+*/
