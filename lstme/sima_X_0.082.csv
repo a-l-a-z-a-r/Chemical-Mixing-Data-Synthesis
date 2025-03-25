@@ -1,4 +1,4 @@
-Time (s),Biomass (g/mL),Lactic Acid (g/mL),Lactose (g/mL)
+time,biomass,lactic acid,lactose
 0.0,0.0820,45.5462,0.0210
 1.0,0.0821,45.5293,0.0210
 2.0,0.0821,45.5125,0.0210

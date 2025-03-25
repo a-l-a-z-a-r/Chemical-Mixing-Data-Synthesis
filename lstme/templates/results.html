@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>pH Prediction Results</title>
+    <style>
+        body {
+            background-color: #1e1e1e;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #444;
+            text-align: center;
+        }
+        th {
+            background-color: #333;
+        }
+        h2, h3 {
+            color: #00BFFF;
+        }
+        .metrics {
+            margin-top: 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Predicted vs Actual pH</h2>
+    <img src="{{ url_for('plot_png') }}" alt="pH Plot">
+
+    {% if metrics %}
+    <h3>Model Performance</h3>
+    <ul>
+        <li>R² Score: {{ metrics["R² Score"] }}</li>
+        <li>MAPE: {{ metrics["MAPE (%)"] }}%</li>
+        <li>Estimated Accuracy: {{ metrics["Accuracy (%)"] }}%</li>
+    </ul>
+    {% else %}
+        <p><em>Performance metrics not available.</em></p>
+    {% endif %}
+
+
+    <table>
+        <thead>
+            <tr>
+                <th>Time</th>
+                <th>Actual pH</th>
+                <th>Predicted pH</th>
+                <th>Alpha Error</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in table %}
+            <tr>
+                <td>{{ row["Time"] }}</td>
+                <td>{{ row["Actual pH"] }}</td>
+                <td>{{ row["Predicted pH"] }}</td>
+                <td>{{ row["Alpha Error"] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

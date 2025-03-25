@@ -27,7 +27,7 @@ func runSimulation(initialConditions map[string]float64, params map[string]float
 	defer writer.Flush()
 
 	// Write the CSV header
-	header := []string{"Time (s)", "Biomass (g/mL)", "Lactic Acid (g/mL)", "Lactose (g/mL)", "Volume (mL)", "Temperature (K)", "pH"}
+	header := []string{"time", "biomass", "lactic acid", "lactose"}
 	if err := writer.Write(header); err != nil {
 		log.Fatalf("Error writing CSV header for %s: %v", fileName, err)
 	}
@@ -39,9 +39,7 @@ func runSimulation(initialConditions map[string]float64, params map[string]float
 			fmt.Sprintf("%.4f", res[0]),        // Biomass
 			fmt.Sprintf("%.4f", res[1]),        // Lactic Acid
 			fmt.Sprintf("%.4f", res[2]),        // Lactose
-			fmt.Sprintf("%.4f", res[3]),        // Volume
-			fmt.Sprintf("%.2f", res[4]),        // Temperature
-			fmt.Sprintf("%.2f", res[5]),        // pH
+
 		}
 		if err := writer.Write(row); err != nil {
 			log.Fatalf("Error writing CSV row for %s: %v", fileName, err)
@@ -78,7 +76,7 @@ func main() {
 	// Run simulation for each set of initial conditions
 	for _, initialConditions := range initialConditionsList {
 		// Create a unique filename based on initial biomass value
-		fileName := fmt.Sprintf("fermentation_X_%.3f.csv", initialConditions["X"])
+		fileName := fmt.Sprintf("sima_X_%.3f.csv", initialConditions["X"])
 
 		// Run the simulation and save results
 		runSimulation(initialConditions, params, temperatureProfile, timeSteps, dt, fileName)

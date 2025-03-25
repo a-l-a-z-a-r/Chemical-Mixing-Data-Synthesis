@@ -1,0 +1,3 @@
+import pandas as pd
+df = pd.read_csv("fermentation_X_0.137.csv", index_col=False)
+print("Column Names:", df.columns.tolist())
