@@ -2,6 +2,8 @@
 # Deep Learning  pH Prediction System
 
 A smart web app for predicting pH changes during cream cheese fermentation using a hybrid **grey-box model**, combining **reaction kinetics** with **neural networks** (via TensorFlow). Inspired by **Guo et al. (2023)**.
+![UI Preview](chempic.png)
+![UI Preview](chempic2.png)
 
 ---
 
@@ -28,4 +30,3 @@ A smart web app for predicting pH changes during cream cheese fermentation using
 
 ## Probable use
 Companies can integrate this method to save costs by knowing exact Ph value.
-![UI Preview](chempic.png)
