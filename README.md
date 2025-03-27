@@ -19,7 +19,8 @@ A smart web app for predicting pH changes during cream cheese fermentation using
 
 ---
 
-### How to Test the Product
+### How to Test the Product -- Windows
+
 
 - Install **TensorFlow**, **Flask**, and make sure you have the latest version of **Python** installed  
 - Clone the GitHub repository  
