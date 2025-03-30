@@ -76,9 +76,6 @@ class FermentationLSTM:
         for i in range(min(5, len(preds))):
             print(f"True pH: {y_test[i]:.3f} | Predicted: {preds[i]:.3f}")
 
-# -------------------------
-# Usage
-# -------------------------
 if __name__ == "__main__":
     model = FermentationLSTM(csv_path="fermentation_X_0.137.csv")
     model.run()
