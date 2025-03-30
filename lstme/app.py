@@ -134,8 +134,6 @@ class PHPredictorAPI:
         img_io.seek(0)
         return send_file(img_io, mimetype='image/png')
 
-
-# 🔥 Launch
 if __name__ == '__main__':
     app = Flask(__name__)
     predictor = PHPredictor()
