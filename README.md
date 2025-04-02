@@ -34,6 +34,7 @@ A smart web app for predicting pH changes during cream cheese fermentation using
   - Variation periods in the fermentation process
 
 - Navigate to the `lstme` folder and train the LSTM model using the generated CSV files  
+  > This is not mandatory the current model is already trained with sufficent CSV files but it can be improved upon
 - Run the API server using Flask  
 - Open the development address in your browser to access the web interface  
   > Note: The website is not deployed due to hosting costs and limited funding  
