@@ -19,10 +19,9 @@ A smart web app for predicting pH changes during cream cheese fermentation using
 
 ---
 
-### How to Test the Product -- Windows
+### How to Test the Product -- Windows/Mac
 
 
-- Install **TensorFlow**, **Flask**, and make sure you have the latest version of **Python** installed  
 - Clone the GitHub repository  
 - Navigate to the `GenerateData` folder and run `main.go`  
   This will generate a folder with CSV data
@@ -33,14 +32,17 @@ A smart web app for predicting pH changes during cream cheese fermentation using
   - Time steps during cooking  
   - Variation periods in the fermentation process
 
-- Navigate to the `lstme` folder and train the LSTM model using the generated CSV files  
-  > This is not mandatory the current model is already trained with sufficent CSV files but it can be improved upon
-- Run the API server using Flask  
+- Run the API server using Flask
+  >Requires that you have python3 and flask installed 
 - Open the development address in your browser to access the web interface  
   > Note: The website is not deployed due to hosting costs and limited funding  
 
 - Upload one of the generated CSV files through the interface  
   > Note: The LSTM model does **not** use the `pH` column to make predictions — it learns from other features
+
+- Navigate to the `lstme` folder and train the LSTM model using the generated CSV files  
+  > This is not mandatory the current model is already trained with sufficent CSV files but it can be improved upon
+  > Required prequesits: Tensorflow, keras
 
 ---
 
@@ -48,5 +50,5 @@ A smart web app for predicting pH changes during cream cheese fermentation using
 
 Companies can integrate this method into their fermentation process to:
 - Accurately predict pH behavior  
-- Reduce trial-and-error in R&D  
+- Reduce trial-and-error in Production  
 - Save costs through smarter bioprocess optimization  
